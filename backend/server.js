@@ -241,7 +241,7 @@ app.put("/api/tasks/update-all", verifyToken, async (req, res) => {
     }
 })
 
-app.listen(5000, () => {
+app.listen(PORT || 5000, () => {
     console.log("Started server on port 5000")
     connectDB();
 })
