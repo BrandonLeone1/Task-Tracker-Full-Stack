@@ -15,7 +15,7 @@ app.post("/api/auth/signup", async (req, res) => {
     const {name, email, password} = req.body;
 
     try {
-      if (!name || !email ||!password) {
+      if (!name || !email ||!password || typeof name !== "string" || typeof email !== "string" || typeof password !== "string") {
         return res.status(401).json({success: false, message: "Didn't receive all input fields."})
     }
 
@@ -50,7 +50,7 @@ app.post("/api/auth/login", async (req, res) => {
     const {email, password} = req.body;
 
     try {
-        if (!email || !password) {
+        if (!email || !password || typeof email !== "string" || typeof password !== "string") {
             return res.status(401).json({success: false, message: "Not provided email and/or password"})
         }
 
@@ -85,7 +85,7 @@ app.post("/api/boards/add", verifyToken, async (req, res) => {
     const {name, category} = req.body;
 
     try {
-        if (!name || typeof category !== "string") {
+        if (!name || typeof category !== "string" || !category || typeof name !== "string") {
             return res.status(400).json({success: false, message: "Failed to add board, didnt receive proper or all data required"})
         }
 
@@ -159,7 +159,7 @@ app.post("/api/tasks/add", verifyToken, async (req, res) => {
     const {name, status, description, boardID} = req.body;
 
     try {
-        if (!name || !status || !description || !boardID || typeof name !== "string" || typeof name !== "string" || typeof name !== "string" || typeof boardID !== "string") {
+        if (!name || !status || !description || !boardID || typeof name !== "string" || typeof status !== "string" || typeof description !== "string" || typeof boardID !== "string") {
             return res.status(400).json({success: false, message: "Failed to add task. Didnt receive all data"})
         }
 
