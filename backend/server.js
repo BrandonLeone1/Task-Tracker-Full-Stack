@@ -7,9 +7,15 @@ import verifyToken from './verifyToken.js';
 import checkAuth from './checkAuth.js';
 import Board from './Board.js';
 import Task from './Task.js';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import cors from 'cors';
 
 const app = express();
+app.use(cors({
+    origin: [
+        'http://localhost:5173'
+    ]
+}))
 app.use(express.json())
 dotenv.config()
 app.post("/api/auth/signup", async (req, res) => {
