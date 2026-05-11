@@ -7,10 +7,11 @@ import verifyToken from './verifyToken.js';
 import checkAuth from './checkAuth.js';
 import Board from './Board.js';
 import Task from './Task.js';
+import dotenv from 'dotenv'
 
 const app = express();
 app.use(express.json())
-
+dotenv.config()
 app.post("/api/auth/signup", async (req, res) => {
     const {name, email, password} = req.body;
 
@@ -241,7 +242,7 @@ app.put("/api/tasks/update-all", verifyToken, async (req, res) => {
     }
 })
 
-app.listen(PORT || 5000, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log("Started server on port 5000")
     connectDB();
 })

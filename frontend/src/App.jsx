@@ -16,9 +16,10 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingBoards, setLoadingBoards] = useState(false);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   async function createUser (newUser) {
-    const response = await fetch(`/api/auth/signup`, {
+    const response = await fetch(`${API_URL}/api/auth/signup`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       credentials: "include",
@@ -33,7 +34,7 @@ function App() {
   }
 
   async function loginUser (existingUser) {
-    const response = await fetch(`/api/auth/login`, {
+    const response = await fetch(`${API_URL}/api/auth/login`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       credentials: "include",
@@ -52,7 +53,7 @@ function App() {
   async function checkAuthAndGetUser () {
     setIsLoading(true);
     const token = localStorage.getItem("token");
-    const response = await fetch(`/api/auth/check`, {
+    const response = await fetch(`${API_URL}/api/auth/check`, {
       credentials: "include",
       headers: {"Authorization": `Bearer ${token}`}
     });
@@ -71,7 +72,7 @@ function App() {
 
   async function addBoard (newBoard) {
     const token = localStorage.getItem("token");
-    const response = await fetch(`/api/boards/add`, {
+    const response = await fetch(`${API_URL}/api/boards/add`, {
       method: "POST",
       headers: {"Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
@@ -89,7 +90,7 @@ function App() {
 async function getBoards () {
   setLoadingBoards(true);
   const token = localStorage.getItem("token");
-  const response = await fetch(`/api/boards/get`, {
+  const response = await fetch(`${API_URL}/api/boards/get`, {
     headers: {"Authorization": `Bearer ${token}`},
     credentials: "include"
   })
@@ -103,7 +104,7 @@ async function getBoards () {
 
 async function deleteMethod(id) {
   const token = localStorage.getItem("token");
-  const response = await fetch(`/api/boards/delete/${id}`, {
+  const response = await fetch(`${API_URL}/api/boards/delete/${id}`, {
     method: "DELETE",
     headers: {"Content-Type": "application/json", 
       "Authorization": `Bearer ${token}`
@@ -119,7 +120,7 @@ async function deleteMethod(id) {
 
   async function updateBoard(id, updatedBoard) {
     const token = localStorage.getItem("token")
-    const response = await fetch(`/api/boards/edit/${id}`, {
+    const response = await fetch(`${API_URL}/api/boards/edit/${id}`, {
       method: "PUT",
       headers: {"Content-Type": "application/json", 
         "Authorization": `Bearer ${token}`},
@@ -141,7 +142,7 @@ async function deleteMethod(id) {
 
   async function addTask (newTask) {
     const token = localStorage.getItem("token");
-    const response = await fetch(`/api/tasks/add`, {
+    const response = await fetch(`${API_URL}/api/tasks/add`, {
       method: "POST",
       headers: {"Content-Type": "application/json", "Authorization": `Bearer ${token}`},
       credentials: "include",
@@ -157,7 +158,7 @@ async function deleteMethod(id) {
 
   async function getTasks () {
     const token = localStorage.getItem("token")
-    const response = await fetch(`/api/tasks/get`, {
+    const response = await fetch(`${API_URL}/api/tasks/get`, {
       credentials: "include",
       headers: {"Authorization": `Bearer ${token}`}
     })
@@ -170,7 +171,7 @@ async function deleteMethod(id) {
 
   async function deleteTaskMethod (id) {
     const token = localStorage.getItem("token");
-    const response = await fetch(`/api/tasks/delete/${id}`, {
+    const response = await fetch(`${API_URL}/api/tasks/delete/${id}`, {
       method: "DELETE",
       headers: {"Authorization": `Bearer ${token}`},
       credentials: "include"
@@ -188,7 +189,7 @@ async function deleteMethod(id) {
     try {
     setTasks(updatedTasks);
     const token = localStorage.getItem("token")
-    const response = await fetch(`/api/tasks/update-all`, {
+    const response = await fetch(`${API_URL}/api/tasks/update-all`, {
       method: "PUT",
       headers:{"Content-Type": "application/json", "Authorization": `Bearer ${token}`},
       credentials:"include",
