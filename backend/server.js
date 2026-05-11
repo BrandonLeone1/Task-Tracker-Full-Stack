@@ -9,17 +9,34 @@ import Board from './Board.js';
 import Task from './Task.js';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import {rateLimit} from 'express-rate-limit'
 
 const app = express();
+const overallLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: 400,
+    standardHeaders: 'draft-8',
+    legacyHeaders: false
+})
+app.use(overallLimiter);
+
+const authLimiter = rateLimit({
+    windowMs: 5 * 60 * 1000,
+    limit: 5,
+    standardHeaders: 'draft-8',
+    legacyHeaders: false
+})
+
 app.use(cors({
     origin: [
+        'https://task-tracker-full-stack-psi.vercel.app',
         'http://localhost:5173'
     ],
     credentials: true
 }))
 app.use(express.json())
 dotenv.config()
-app.post("/api/auth/signup", async (req, res) => {
+app.post("/api/auth/signup", authLimiter, async (req, res) => {
     const {name, email, password} = req.body;
 
     try {
@@ -54,7 +71,7 @@ app.post("/api/auth/signup", async (req, res) => {
     
 })
 
-app.post("/api/auth/login", async (req, res) => {
+app.post("/api/auth/login", authLimiter, async (req, res) => {
     const {email, password} = req.body;
 
     try {
