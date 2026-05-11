@@ -4,7 +4,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 async function verifyToken (req, res, next) {
-    const authHeader = req.headers.authorization;
+    
+    try {
+      const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
         return res.status(401).json({success: false, message: "No auth header"})
@@ -19,7 +21,12 @@ async function verifyToken (req, res, next) {
     const decodedToken = jwt.decode(token);
 
     req.userID = decodedToken.userID;
-    next();
+    next();  
+    } catch (error) {
+        return res.status(401).json({success: false, message: "invalid or missing token"})
+    }
+    
+    
 
 }
 
