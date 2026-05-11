@@ -68,6 +68,7 @@ function App() {
       setActiveUser(null);
       setIsLoading(false);
     }
+    setIsLoading(false)
   }
 
   async function addBoard (newBoard) {
