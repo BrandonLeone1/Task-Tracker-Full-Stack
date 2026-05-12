@@ -110,7 +110,7 @@ app.post("/api/boards/add", verifyToken, async (req, res) => {
     const {name, category} = req.body;
 
     try {
-        if (!name || typeof category !== "string" || !category || typeof name !== "string") {
+        if (!name || typeof category !== "string" || typeof name !== "string") {
             return res.status(400).json({success: false, message: "Failed to add board, didnt receive proper or all data required"})
         }
 

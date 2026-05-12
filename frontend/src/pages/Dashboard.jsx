@@ -48,7 +48,7 @@ export function Dashboard ({activeUser, loadingBoards, addBoard, getBoards, getT
                 className="border border-gray-200 p-2 rounded-xl w-full mt-2"
                 />
                 </label>
-                <label htmlFor="board-category-input">Category (optional)
+                <label htmlFor="board-category-input">Category (optional):
                 <input 
                 type="text"
                 id="board-category-input"
@@ -64,7 +64,7 @@ export function Dashboard ({activeUser, loadingBoards, addBoard, getBoards, getT
 
                 <button 
                 onClick={handleAddBoard}
-                className="bg-cyan-700 w-full mt-2 cursor-pointer text-neutral-100 py-1.5 rounded-xl after:h-full after:w-0  after:bg-cyan-800 after:block after:absolute after:inset-0 after:rounded-xl hover:after:w-full after:duration-300 overflow-hidden z-10 after:z-[-1] relative font-medium">Add</button>
+                className="bg-cyan-700 w-full mt-2 hover:bg-cyan-800 cursor-pointer text-neutral-100 py-1.5 rounded-xl  font-medium">Add</button>
             </div>
             </div>
 

@@ -3,7 +3,7 @@ export function ProtectedRoute({activeUser, children, isLoading}) {
     
     if (isLoading) {
         return (
-            <div>Loading...</div>
+            <div className="p-6">Waking up server... this could take about 60 seconds</div>
         )
     }
     

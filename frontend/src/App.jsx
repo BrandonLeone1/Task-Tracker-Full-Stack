@@ -16,6 +16,8 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingBoards, setLoadingBoards] = useState(false);
+  const [createdUser, setCreatedUser] = useState(false);
+  const [failedCreatedUser, setFailedCreatedUser] = useState(false);
   const API_URL = import.meta.env.VITE_API_URL;
 
   async function createUser (newUser) {
@@ -28,8 +30,17 @@ function App() {
     const data = await response.json();
     console.log(data.success, data.message);
     if (data.success) {
-      
-      localStorage.setItem("token", data.token)
+      localStorage.setItem("token", data.token);
+      setCreatedUser(true);
+      setTimeout(() => {
+        setCreatedUser(false);
+      }, 3000);
+    }
+    if (!data.success) {
+      setFailedCreatedUser(true);
+      setTimeout(() => {
+        setFailedCreatedUser(false);
+      }, 3000);
     }
   }
 
@@ -211,8 +222,6 @@ async function deleteMethod(id) {
     
   }
 
-console.log(loadingBoards)
-
 useEffect(() => {
   checkAuthAndGetUser();
 },[])
@@ -221,7 +230,7 @@ useEffect(() => {
       <Routes>
         <Route path="/" element={
           <PublicRoute activeUser={activeUser} isLoading={isLoading}>
-          <Signup createUser={createUser}/>
+          <Signup createUser={createUser} createdUser={createdUser} failedCreatedUser={failedCreatedUser}/>
           </PublicRoute> } />
 
         <Route path='/login' element={

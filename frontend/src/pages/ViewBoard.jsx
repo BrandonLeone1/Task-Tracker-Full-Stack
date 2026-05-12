@@ -208,7 +208,7 @@ export function ViewBoard ({addTask, tasks, deleteTaskMethod, updateTasks, board
         }))}
         />
         </label>
-        <button onClick={handleClick} className="bg-cyan-700 py-1.5 overflow-hidden rounded-lg text-neutral-100 cursor-pointer font-medium text-lg after:w-0 hover:after:w-full after:duration-300 after:h-full after:block after:bg-cyan-800 after:absolute relative after:inset-0 after:rounded-lg z-10 after:z-[-1]">Add task</button>
+        <button onClick={handleClick} className="bg-cyan-700 py-1.5 rounded-lg text-neutral-100 cursor-pointer font-medium text-lg hover:bg-cyan-800">Add task</button>
        </div>
 
         { tasksForThisBoard.length > 0 && (

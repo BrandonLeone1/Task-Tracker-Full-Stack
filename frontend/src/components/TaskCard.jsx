@@ -36,8 +36,8 @@ export function TaskCard ({task, deleteTaskMethod, taskBeingDragged}) {
             ref={setNodeRef} style={style} className={`flex flex-col p-4 gap-2 bg-white border border-gray-300 rounded-lg ${ !taskBeingDragged || taskBeingDragged._id !== task._id ? "opacity-100" : "opacity-30"}`} >
                 
                 <div className="flex gap-2 justify-between mb-2">
-                <button {...attributes} {...listeners} className="text-3xl cursor-pointer text-cyan-700 hover:text-cyan-800 duration-150">☰</button>
-                <button className="ml-auto cursor-pointer" onClick={() => handleDeleteClick(task._id)}><i className="fa-solid fa-x text-xl text-rose-500 hover:text-rose-700 duration-150"></i></button>
+                <button {...attributes} {...listeners} className="text-3xl cursor-pointer text-cyan-700 hover:text-cyan-800">☰</button>
+                <button className="ml-auto cursor-pointer" onClick={() => handleDeleteClick(task._id)}><i className="fa-solid fa-x text-xl text-rose-500 hover:text-rose-700"></i></button>
                 </div>
 
                 <div className="flex flex-col gap-4">

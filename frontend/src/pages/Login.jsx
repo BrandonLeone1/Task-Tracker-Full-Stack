@@ -22,30 +22,35 @@ export function Login ({loginUser}) {
         <div className="flex items-center justify-center h-screen">
 
             <div className="flex flex-col gap-4 bg-white p-6 rounded-lg">
+                <label htmlFor="email-input">Your email
                 <input 
                 type="email"
-                placeholder="Your email"
+                id="email-input"
+                placeholder="Email"
                 value={existingUser.email}
                 onChange={(e) => setExistingUser(prev => ({
                     ...prev,
                     email: e.target.value
                 }))}
-                 className="border p-2 border-gray-300 rounded-xl"
+                 className="border p-2 w-full mt-2 border-gray-300 rounded-xl"
                 />
+                </label>
+                <label htmlFor="password-input">Your password
                 <input 
                 type="password"
-                placeholder="Your password"
+                id="password-input"
+                placeholder="Password"
                 value={existingUser.password}
                 onChange={(e) => setExistingUser(prev => ({
                     ...prev,
                     password: e.target.value
                 }))}
-                 className="border p-2 border-gray-300 rounded-xl"
+                 className="border p-2 w-full mt-2 border-gray-300 rounded-xl"
                 />
-                
+                </label>
                 <button
                 onClick={handleClick}
-                className="bg-cyan-700 text-neutral-100 p-2 rounded-xl"
+                className="bg-cyan-700 hover:bg-cyan-800 cursor-pointer text-neutral-100 p-2 rounded-xl"
                 >Login</button>
             </div>
 
