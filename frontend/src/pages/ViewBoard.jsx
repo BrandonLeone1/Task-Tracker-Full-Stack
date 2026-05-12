@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { TaskCard } from "../components/TaskCard";
-import { DndContext } from '@dnd-kit/core'
+import { DndContext, useSensors, useSensor, PointerSensor, KeyboardSensor, TouchSensor} from '@dnd-kit/core'
 import { DroppableColumn } from "../components/DroppableColumn";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import {arrayMove} from '@dnd-kit/sortable';
 import { DragOverlay } from "@dnd-kit/core";
 import {useParams} from 'react-router-dom';
+
 
 export function ViewBoard ({addTask, tasks, deleteTaskMethod, updateTasks, boards, isLoading}) {
     
@@ -148,6 +149,14 @@ export function ViewBoard ({addTask, tasks, deleteTaskMethod, updateTasks, board
         setTaskBeingDragged(activeTask);
     }
 
+    const sensors = useSensors(
+        useSensor(PointerSensor, {
+            delay: 200,
+            tolerance: 2
+        }),
+        useSensor(KeyboardSensor),
+        useSensor(TouchSensor)
+    );
     
     return (
         <>
@@ -207,7 +216,7 @@ export function ViewBoard ({addTask, tasks, deleteTaskMethod, updateTasks, board
         )
     }
        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mx-auto text-center mt-6">
-            <DndContext onDragEnd={handleDragEnd} onDragStart={handleDragStart}>
+            <DndContext onDragEnd={handleDragEnd} onDragStart={handleDragStart} sensors={sensors}>
             <div>
                 
                 <DroppableColumn id={"ToDo"} status={"ToDo"}>
